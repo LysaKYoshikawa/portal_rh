@@ -46,6 +46,7 @@ const postController = require('../controllers/postController');
 
 post_route.post('/create-post', upload.single('image'),postController.createPost);
 post_route.get('/get-posts', postController.getPosts);
+post_route.get('/delete-post/:id', postController.deletePost)
 // post_route.use(upload.single('file')); // Processar o arquivo antes de analisar o corpo da solicitação
 // post_route.use(bodyParser.json());
 // post_route.use(bodyParser.urlencoded({ extended: true }));

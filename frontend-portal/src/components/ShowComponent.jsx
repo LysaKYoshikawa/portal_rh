@@ -16,7 +16,19 @@ function ShowComponent(){
 
     },[]);
 
-    console.log(posts);
+    const deletePost = async(id, e)=>{
+
+       let response =  await postService.deletePost(id);
+       if(response.data.success == true){
+            alert(response.data.msg);
+            document.getElementById(id).parentElement.parentElement.remove();
+
+       }else{
+            alert(response.data.msg);
+
+       }
+        
+    }
 
     return(
         <div className="App">
@@ -30,6 +42,7 @@ function ShowComponent(){
                             <th>RG</th>
                             <th>CPF</th>
                             <th>Anexo</th>
+                            <th>Delete</th>
                         </thead>
                         <tbody>
                             {
@@ -40,6 +53,9 @@ function ShowComponent(){
                                         <td>{post.rg}</td>
                                         <td>{post.cpf}</td>
                                         <td>{post.image}</td>
+                                        <td>
+                                            <button id={post._id} onClick={(e)=>deletePost(post._id,e)}>Delete</button>
+                                        </td>
                                     </tr>
                                 )
 
