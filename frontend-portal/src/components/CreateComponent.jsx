@@ -21,7 +21,16 @@ function CreateComponent(){
         formData.append('image', image);
 
         const response = await postService.create(formData);
-        console.log('Esse é o response da api para front',response)
+        if(response.data.sucess == true){
+            setMessage('Funcionario adicionado com sucesso!!!')
+
+        }else{
+            setMessage('Deu erro na adição de funcionarios')
+        }
+
+        setTimeout(function(){
+            setMessage('')
+        },2000);
         event.target.reset();
 
     };
@@ -32,7 +41,7 @@ function CreateComponent(){
             <form onSubmit={handleSubmit}>
                 <input type="text"
                     name="title"
-                    placeholder='Enter Post Title'
+                    placeholder='Seu nome'
                     onChange={event => setTitle(event.target.value)}
                     required/>
                 <br/>
