@@ -5,7 +5,7 @@ class Post{
         const url = "http://localhost:8001/api/create-post";
         const config = {
             headers:{
-                'content-type':'multipart/form-data',
+                'enctype':'multipart/form-data',
             }
         };
         return axios.post(url, formData, config);
@@ -27,7 +27,7 @@ class Post{
         const url = "http://localhost:8001/api/update-post";
         const config = {
             headers:{
-                'content-type':'multipart/form-data',
+                'enctype':'multipart/form-data',
             }
         };
         return axios.post(url, formData, config);
