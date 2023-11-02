@@ -1,5 +1,7 @@
 import {useState, useEffect} from 'react';
 import postService from '../service/postService';
+import UpdateModalComponent from "./UpdateModalComponent";
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 function ShowComponent(){
 
@@ -43,6 +45,7 @@ function ShowComponent(){
                             <th>CPF</th>
                             <th>Anexo</th>
                             <th>Delete</th>
+                            <th>Editar</th>
                         </thead>
                         <tbody>
                             {
@@ -55,6 +58,9 @@ function ShowComponent(){
                                         <td>{post.image}</td>
                                         <td>
                                             <button id={post._id} onClick={(e)=>deletePost(post._id,e)}>Delete</button>
+                                        </td>
+                                        <td>
+                                            <UpdateModalComponent/>
                                         </td>
                                     </tr>
                                 )

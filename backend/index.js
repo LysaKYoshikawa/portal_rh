@@ -16,6 +16,6 @@ mongoose.connect("mongodb://127.0.0.1:27017/BACKEND");
 const post_route = require('./src/routes/postRoute');
 app.use('/api', post_route);
 
-app.listen(8000,function(){
+app.listen(8001,function(){
     console.log('Rodando')
 });
