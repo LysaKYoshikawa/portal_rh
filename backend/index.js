@@ -11,11 +11,12 @@ app.use(cors({
 const mongoose = require('mongoose');
 
 mongoose.connect("mongodb://127.0.0.1:27017/BACKEND");
+// mongodb://localhost:27017
 
 
-const post_route = require('./src/routes/postRoute');
-app.use('/api', post_route);
+const registerRouter = require('./src/routes/registerRoute');
+app.use('/api', registerRouter);
 
 app.listen(8001,function(){
-    console.log('Rodando')
+    console.log('Rodando na porta 8001')
 });
