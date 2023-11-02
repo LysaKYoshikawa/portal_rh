@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import postService from '../service/postService';
 import UpdateModalComponent from "./UpdateModalComponent";
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function ShowComponent(){
 
@@ -16,7 +16,7 @@ function ShowComponent(){
     useEffect(()=>{
         fetchPosts();
 
-    },[]);
+    },[posts]);
 
     const deletePost = async(id, e)=>{
 
@@ -60,7 +60,7 @@ function ShowComponent(){
                                             <button id={post._id} onClick={(e)=>deletePost(post._id,e)}>Delete</button>
                                         </td>
                                         <td>
-                                            <UpdateModalComponent/>
+                                            <UpdateModalComponent id={post._id} title={post.title}date={post.date}rg={post.rg}cpf={post.cpf}/>
                                         </td>
                                     </tr>
                                 )
