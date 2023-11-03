@@ -8,7 +8,7 @@ class Register{
                 'enctype':'multipart/form-data',
             }
         };
-        return axios.register(url, formData, config);
+        return axios.post(url, formData, config);
     };
 
     getRegisters(){
@@ -30,7 +30,7 @@ class Register{
                 'enctype':'multipart/form-data',
             }
         };
-        return axios.register(url, formData, config);
+        return axios.post(url, formData, config);
     };
     
 }
