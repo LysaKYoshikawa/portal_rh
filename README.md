@@ -34,10 +34,10 @@ Ele é dividido em duas partes a parte backend e frontend separando sua responsa
 Primeiramente sugiro rodar o backend e depois o frontend
 
 - rodar projeto backend 
-[passo a passo do backend](../portal_rh/backend/README.md)
+[passo a passo do backend](../portal_rh/backend/README.md) : ../portal_rh/backend/README.md
 
 - rodar projeto front 
-[passo a passo do frontend](../portal_rh/frontend-portal/README.md)
+[passo a passo do frontend](../portal_rh/frontend-portal/README.md) : ../portal_rh/frontend-portal/README.md
 
 
 ## Bibliotecas Utilizadas
