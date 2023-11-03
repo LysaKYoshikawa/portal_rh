@@ -5,6 +5,11 @@ import CreateComponent from './components/CreateComponent'
 function App() {
   return (
     <div className="App">
+      <nav class="navbar navbar-light bg-light">
+        
+        <img src="../public/logo192-transparente.png" width="30" height="30" alt=""/>
+        
+      </nav>
       <CreateComponent/>
     </div>
   );
