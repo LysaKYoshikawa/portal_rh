@@ -14,8 +14,11 @@ const createRegister = async (req, res) => {
             email: req.body.email,
             rg: req.body.rg,
             cpf: req.body.cpf,
-            fileDoc: req.files['fileDoc'][0].filename,
             address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            zip: req.body.zip,
+            fileDoc: req.files['fileDoc'][0].filename,
             fileAddress: req.files['fileAddress'][0].path,
             fileEmployContract: req.files['fileEmployContract'][0].path,
             fileResume: req.files['fileResume'][0].path,
@@ -68,9 +71,12 @@ const updateRegister = async (req, res) => {
             let date = req.body.date;
             let email = req.body.email;
             let rg = req.body.rg;
-            let cpf = req.body.cpf;
-            let fileDoc = req.body.fileDoc;
+            let cpf = req.body.cpf;            
             let address = req.body.address;
+            let city= req.body.city;
+            let state= req.body.state;
+            let zip= req.body.zip;
+            let fileDoc = req.body.fileDoc;
             let fileAddress = req.file.fileAddress;
             let fileEmployContract = req.file.fileEmployContract;
             let fileResume = req.file.fileResume;
@@ -83,8 +89,11 @@ const updateRegister = async (req, res) => {
                     email: email,
                     rg: rg,
                     cpf: cpf,
-                    fileDoc: fileDoc,
                     address: address,
+                    city: city,
+                    state: state,
+                    zip: zip,
+                    fileDoc: fileDoc,
                     fileAddress: fileAddress,
                     fileEmployContract: fileEmployContract,
                     fileResume: fileResume,
@@ -104,6 +113,9 @@ const updateRegister = async (req, res) => {
             let rg = req.body.rg;
             let cpf = req.body.cpf;
             let address = req.body.address;
+            let city= req.body.city;
+            let state= req.body.state;
+            let zip= req.body.zip;
             let cel = req.body.cel;
 
             await Register.findByIdAndUpdate({ _id: id }, {
@@ -115,6 +127,9 @@ const updateRegister = async (req, res) => {
                     cpf: cpf,
                     address: address,
                     cel: cel,
+                    city: city,
+                    state: state,
+                    zip: zip,
                     msg: error.message
                 }
             });

@@ -14,11 +14,11 @@ const postSchema = mongoose.Schema({
         required:true
     },
     rg:{
-        type:Number,
+        type:String,
         required:true
     },
     cpf:{
-        type:Number,
+        type:String,
         required:true
     },
     fileDoc:{
@@ -27,6 +27,18 @@ const postSchema = mongoose.Schema({
     },
     address:{
         type:String,
+        required:true
+    },
+    city:{
+        type:String,
+        required:true
+    },
+    state:{
+        type:String,
+        required:true
+    },
+    zip:{
+        type:Number,
         required:true
     },
     fileAddress:{
