@@ -1,7 +1,7 @@
 
 .formulario{
     font-size: 50px;
-    color: blueviolet;
+    color: #d46220;
     text-align: center;
 }
 
@@ -10,3 +10,17 @@
     font-weight: bold;
     text-align: right;
 }
+
+
+.custom-btn {
+    background-color: #d46220;
+    border-color: #d46220;
+    border-radius: 10%;
+    color: #fff; 
+    text-align: center;
+    font-size: 20px; 
+}
+.custom-btn:hover{
+    background-color: #d15711;
+}
+  
