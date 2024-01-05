@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  font-family: "Gill Sans", sans-serif;
 }
 
 .App-logo {
@@ -35,4 +35,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 30px;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  font-size: 25px;
+}
+
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+
+footer a:hover {
+  text-decoration: underline;
 }

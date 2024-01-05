@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
-
 import React, {useState} from 'react'
-import registerService from '../service/registerService';
+import './CreateComponent.css'
+import registerService from '../../service/registerService';
 import { useNavigate } from "react-router-dom";
 
 
@@ -22,12 +22,16 @@ function CreateComponent(){
     const [fileEmployContract,setFileEmployContract] = useState('');
     const [fileResume,setFileResume] = useState('');
     const [message,setMessage] = useState('');
+    const [attachmentsAdded, setAttachmentsAdded] = useState(false);
 
     const navigate = useNavigate();
 
     const handleSubmit = async(event)=>{
         event.preventDefault();
-
+        if (!attachmentsAdded) {
+            setMessage('Por favor, adicione os anexos antes de enviar o formulário.');
+            return; // Não continue com a submissão do formulário
+        }
         const formData = new FormData();
 
         formData.append('name', name);
@@ -46,7 +50,7 @@ function CreateComponent(){
         formData.append('fileResume', fileResume);
 
         const response = await registerService.create(formData);
-        if(response.data.success == true){
+        if(response.data.success === true){
             setMessage('Funcionario adicionado com sucesso!!!')
 
         }else{
@@ -63,16 +67,16 @@ function CreateComponent(){
     return (
         <div className="container p-4">
             <div className="d-flex p-4 justify-content-center border border-primary" >
-                <div className="mb-auto"> 
-                    <h2> Seu formulario</h2>
+                <div> 
+                    <h2 class="formulario"> Dados do candidato</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="row">
-                            <div className="form-group col-md-4">
-                                <label for="inputName">Nome e Sobrenome </label>
+                            <div className="form-group col-md-8">
+                                <label className='label-text mt-3' for="inputName">Nome e Sobrenome </label>
                                 <input type="name" placeholder='Coloque seu nome completo' className="form-control" id="inputName" onChange={event => setName(event.target.value)} required/>
                             </div>
-                            <div className="col-md-4">
-                                <label for="inputDate">Data de nascimento </label>
+                            <div className="form-group col-md-4">
+                                <label className='label-text mt-3' for="inputDate">Data de nascimento </label>
                                 <input type="date" 
                                 placeholder='Coloque seu nome completo' 
                                 className="form-control" 
@@ -81,28 +85,28 @@ function CreateComponent(){
                                 required/>
                             </div>
                             <div className="w-100"></div>
-                            <div className="col-md-4">
-                                <label for="inputEmail">Email</label>
+                            <div className="form-group col-md-6">
+                                <label className='label-text mt-3' for="inputEmail">Email</label>
                                 <input type="email" className="form-control" id="inputEmail"
                                 onChange={event => setEmail(event.target.value)}
                                 required/>
                             </div>                            
-                            <div className="col-md-4">
-                                <label for="inputCel">Telefone/Celular</label>
+                            <div className=" form-group col-md-4">
+                                <label className='label-text mt-3' for="inputCel">Telefone/Celular</label>
                                 <input type="number" className="form-control" id="inputCel"
                                 onChange={event => setCel(event.target.value)}
                                 required/>
                             </div>
                             <div className="w-100"></div>
-                            <div className="col-md-4">
-                                <label for="inputRg">RG</label>
+                            <div className="form-group col-md-6">
+                                <label className='label-text mt-3' for="inputRg">RG</label>
                                 <input type="text" className="form-control" id="inputRg"
                                 onChange={event => setRg(event.target.value)}
                                 placeholder='xxxxxxxx-x'
                                 required/>
                             </div>
-                            <div className="col-md-4">
-                                <label for="inputCpf">CPF</label>
+                            <div className="form-group col-md-6">
+                                <label className='label-text mt-3' for="inputCpf">CPF</label>
                                 <input type="text" className="form-control" id="inputCpf"
                                 onChange={event => setCpf(event.target.value)}
                                 placeholder='xxx.xxx.xxx-xx'
@@ -110,27 +114,25 @@ function CreateComponent(){
                             </div>
                             <div className="w-100"></div>
                                                        
-                            <div className=" col-md-6">
-                                <label for="inputAddress">Endereço</label>
+                            <div className="form-group col-md-8">
+                                <label className='label-text mt-3' for="inputAddress">Endereço</label>
                                 <input type="text" className="form-control" id="inputAddress2" 
                                 placeholder="Ex: Rua da contratada numero 01"
                                 onChange={event => setAddress(event.target.value)}
                                 required/>
                             </div>
 
-                            <div className="col-md-5">
-                                <div className="form-group col-md-3">
-                                    <label for="inputCity">Cidade</label>
-                                    <input type="text" className="form-control" 
-                                    onChange={event => setCity(event.target.value)}
-                                    id="inputCity"/>
-                                </div>
+                            <div className="form-group col-md-4">
+                                <label className='label-text mt-3' for="inputCity">Cidade</label>
+                                <input type="text" className="form-control" 
+                                onChange={event => setCity(event.target.value)}
+                                id="inputCity"/>
                             </div> 
 
                             <div className="w-100"></div>
                             
-                            <div className="form-group col-md-2">
-                                <label for="inputState">Estado</label>
+                            <div className="form-group col-md-3">
+                                <label className='label-text mt-3' for="inputState">Estado</label>
                                 <select id="inputState" className="form-control" onChange={event => setState(event.target.value)}>
                                     <option selected>Selecione</option>
                                     <option>AC</option>
@@ -162,8 +164,8 @@ function CreateComponent(){
 
                                 </select>
                             </div>
-                            <div className="form-group col-md-2">
-                                <label for="inputZip">CEP</label>
+                            <div className="form-group col-md-3">
+                                <label className='label-text mt-3' for="inputZip">CEP</label>
                                 <input type="text" className="form-control"  
                                 onChange={event => setZip(event.target.value)}
                                 id="inputZip"/>
@@ -171,49 +173,49 @@ function CreateComponent(){
                             <div className="w-100"></div>
 
                         </div>
-                        <div className="row">
-                            <div className="col-md-4">
-                                <label for="fileDoc">Anexo de RG e CPF</label>
-                                <input type="file" className="form-control-file" id="fileDoc"
-                                onChange={event => setFileDoc(event.target.files[0])}
-                                required/>
-                            </div>
-                                    
-                            <div className="col-md-4">
-                                <label for="fileAddress">Comprovante de residência</label>
-                                <input type="file" className="form-control-file" id="fileAddress"
-                                onChange={event => setFileAddress(event.target.files[0])}
-                                required/>
-                            </div>
-                            <div className="w-100"></div>
-                            <div className="col-md-4">
-                                <label for="fileEmployContract">Contrato de Trabalho</label>
-                                <input type="file" className="form-control-file" id="fileEmployContract"
-                                onChange={event => setFileEmployContract(event.target.files[0])}
-                                required/>
-                            </div>
-                            <div className="col-md-4">
-                                <label for="fileResume">Curriculo</label>
-                                <input type="file" className="form-control-file" id="fileResume"
-                                onChange={event => setFileResume(event.target.files[0])}
-                                required/>
-                            </div>
-                            <div className="w-100"></div>
 
+                        <form class="col-md-3">
+                            <div className="form-group m-3">
+                                <label for="fileDoc">Anexo de RG e CPF</label>
+                                <input type="file" className="form-control-file mx-2" id="fileDoc"
+                                onChange= {event => {setFileDoc(event.target.files[0]); setAttachmentsAdded(true);}}
+                                required/>
+                            </div>
+                            <div className="form-group m-3">
+                                <label for="fileAddress">Comprovante de residência</label>
+                                <input type="file" className="form-control-file mx-2" id="fileAddress"
+                                onChange={event => {setFileAddress(event.target.files[0]); setAttachmentsAdded(true);}}
+                                required/>
+                            </div>
+                            <div className="form-group m-3">
+                                <label for="fileEmployContract">Contrato de Trabalho</label>
+                                <input type="file" className="form-control-file mx-2" id="fileEmployContract"
+                                onChange={event => {setFileEmployContract(event.target.files[0]); setAttachmentsAdded(true);}}
+                                required/>
+                            </div>
+                            <div className="form-group m-3">
+                                <label for="fileResume">Curriculo</label>
+                                <input type="file" className="form-control-file mx-2" id="fileResume"
+                                onChange={event => {setFileResume(event.target.files[0]); setAttachmentsAdded(true);}}
+                                required/>
+                            </div>
+                        </form>
+
+                        <div className='text-center'>
+                            <button type="submit" 
+                            className="custom-btn btn-lg p-3 m-2"
+                            >Enviar</button>
+
+                            <button type='button' 
+                            className="btn btn-secondary btn-lg p-3 m-2" 
+                            onClick={() => navigate("/show")}>Lista de cadastro</button>
                         </div>
 
-                            
-                        
-                        <button type="submit" className="btn btn-primary mb-2">Enviar</button>
-
-                        
-                        <button classNameNameName="btn btn-secondary btn-sm mr-3" onClick={() => navigate("/show")}>Lista de cadastro</button>
-
-
-                        
                         
 
                     </form>
+
+                    
                     <p>{message}</p>
                 </div>
                 
