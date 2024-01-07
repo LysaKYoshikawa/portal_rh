@@ -55,13 +55,13 @@ function UpdateModalComponent(props){
 
     return(
         <>
-        <Button variant="sucess" onClick={initModal}>
+        <Button variant="warning" onClick={initModal}>
             Editar
         </Button>
 
         <Modal show={isShow}>
             <Modal.Header closeButton onClick={initModal}> 
-                <Modal.Title>Update Register</Modal.Title>
+                <Modal.Title>Atualizar Cadastro</Modal.Title>
 
             </Modal.Header>
             <form onSubmit={handleSubmit}>
@@ -128,11 +128,11 @@ function UpdateModalComponent(props){
 
                 <Modal.Footer>
                     <Button variant="danger" onClick={initModal}>
-                        Close
+                        Fechar
 
                     </Button>
                     <Button type="submit" variant="dark">
-                        Update
+                        Atualizar
 
                     </Button>
                 </Modal.Footer>
