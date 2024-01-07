@@ -16,10 +16,9 @@ function CreateComponent(){
     const [city,setCity] = useState('');
     const [state,setState] = useState('');
     const [zip,setZip] = useState('');
-
-    const [fileDoc,setFileDoc] = useState('');
-    const [fileAddress,setFileAddress] = useState('');
-    const [fileEmployContract,setFileEmployContract] = useState('');
+    const [office,setOffice] = useState('');
+    const [skills,setSkills] = useState('');
+    const [profileLinkedin,setProfileLinkedin] = useState('');
     const [fileResume,setFileResume] = useState('');
     const [message,setMessage] = useState('');
     const [attachmentsAdded, setAttachmentsAdded] = useState(false);
@@ -40,13 +39,13 @@ function CreateComponent(){
         formData.append('cel', cel)
         formData.append('rg', rg);
         formData.append('cpf', cpf);
-        formData.append('fileDoc', fileDoc);
+        formData.append('office', office);
         formData.append('address', address);
         formData.append('city', city);
         formData.append('state', state);
         formData.append('zip', zip);
-        formData.append('fileAddress', fileAddress);
-        formData.append('fileEmployContract', fileEmployContract);
+        formData.append('skills', skills);
+        formData.append('profileLinkedin', profileLinkedin);
         formData.append('fileResume', fileResume);
 
         const response = await registerService.create(formData);
@@ -66,7 +65,7 @@ function CreateComponent(){
 
     return (
         <div className="container p-4">
-            <div className="d-flex p-4 justify-content-center border border-primary" >
+            <div className="d-flex p-4 justify-content-center border" >
                 <div> 
                     <h2 class="formulario"> Dados do candidato</h2>
                     <form onSubmit={handleSubmit}>
@@ -76,7 +75,7 @@ function CreateComponent(){
                                 <input type="name" placeholder='Coloque seu nome completo' className="form-control" id="inputName" onChange={event => setName(event.target.value)} required/>
                             </div>
                             <div className="form-group col-md-4">
-                                <label className='label-text mt-3' for="inputDate">Data de nascimento </label>
+                                <label className='label-text mt-3' for="inputDate">Data de candidatura </label>
                                 <input type="date" 
                                 placeholder='Coloque seu nome completo' 
                                 className="form-control" 
@@ -171,28 +170,29 @@ function CreateComponent(){
                                 id="inputZip"/>
                             </div>
                             <div className="w-100"></div>
+                            <div className="form-group col-md-6">
+                                <label for="office" className='label-text mt-3'>Cargo de Interesse</label>
+                                <input type="text" className="form-control"
+                                onChange= {event => {setOffice(event.target.value);}}
+                                id="office"/>
+                            </div>
+                            <div className="form-group col-md-6">
+                                <label className='label-text mt-3' for="skills">Habilidades</label>
+                                <input type="text" className="form-control" id="skills"
+                                onChange={event => {setSkills(event.target.value)}}
+                                />
+                            </div>
+                            <div className="w-100"></div>
+                            <div className="form-group col-md-4">
+                                <label className='label-text mt-3' for="profileLinkedin">Perfil do Linkedin</label>
+                                <input type="text" className="form-control" id="profileLinkedin"
+                                onChange={event => {setProfileLinkedin(event.target.value);}}
+                                />
+                            </div>
 
                         </div>
 
                         <form class="col-md-3">
-                            <div className="form-group m-3">
-                                <label for="fileDoc">Anexo de RG e CPF</label>
-                                <input type="file" className="form-control-file mx-2" id="fileDoc"
-                                onChange= {event => {setFileDoc(event.target.files[0]); setAttachmentsAdded(true);}}
-                                required/>
-                            </div>
-                            <div className="form-group m-3">
-                                <label for="fileAddress">Comprovante de residência</label>
-                                <input type="file" className="form-control-file mx-2" id="fileAddress"
-                                onChange={event => {setFileAddress(event.target.files[0]); setAttachmentsAdded(true);}}
-                                required/>
-                            </div>
-                            <div className="form-group m-3">
-                                <label for="fileEmployContract">Contrato de Trabalho</label>
-                                <input type="file" className="form-control-file mx-2" id="fileEmployContract"
-                                onChange={event => {setFileEmployContract(event.target.files[0]); setAttachmentsAdded(true);}}
-                                required/>
-                            </div>
                             <div className="form-group m-3">
                                 <label for="fileResume">Curriculo</label>
                                 <input type="file" className="form-control-file mx-2" id="fileResume"

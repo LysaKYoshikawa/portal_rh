@@ -9,7 +9,7 @@ registerRouter.use(express.static('public'));
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '../public/postFilename'), function (error, success) {
+        cb(null, path.join(__dirname, '../../public/postFilename'), function (error, success) {
             if (error) {
                 console.log('Este foi o erro:', error);
             }
@@ -18,7 +18,6 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         const name = Date.now() + '-' + file.originalname;
-        console.log(name, 'esse é a dado', typeof(name))
         cb(null, name, function (error, success) {
             if (error) {
                 console.log('Este foi o erro:', error);
@@ -36,9 +35,6 @@ const upload = multer({ storage: storage });
 const registerController = require('../controllers/registerController');
 
 const fields = [
-    { name: 'fileDoc', maxCount: 1,},
-    { name: 'fileAddress', maxCount: 1 },
-    { name: 'fileEmployContract', maxCount: 1 },
     { name: 'fileResume', maxCount: 1 }
 ];
 

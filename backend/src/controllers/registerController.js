@@ -2,11 +2,9 @@ const Register = require('../models/registerModel');
 
 const createRegister = async (req, res) => {
     try {
-        if (!req.files || !req.files['fileDoc']) {
-            return res.status(400).send({ success: false, msg: 'Campo de arquivo "fileDoc" ausente ou upload falhou.' });
+        if (!req.files || !req.files['fileResume']) {
+            return res.status(400).send({ success: false, msg: 'Campo de arquivo "Curriculo" ausente ou upload falhou.' });
         }
-
-        console.log(req.files)
 
         const register = new Register({
             name: req.body.name,
@@ -18,18 +16,19 @@ const createRegister = async (req, res) => {
             city: req.body.city,
             state: req.body.state,
             zip: req.body.zip,
-            fileDoc: req.files['fileDoc'][0].filename,
-            fileAddress: req.files['fileAddress'][0].path,
-            fileEmployContract: req.files['fileEmployContract'][0].path,
-            fileResume: req.files['fileResume'][0].path,
+            office: req.body.office,
+            skills: req.body.skills,
+            profileLinkedin: req.body.profileLinkedin,
+            fileResume: req.files['fileResume'][0].filename,
             cel: req.body.cel
         });
+        console.log('o que vai aparecer',req.files['fileResume'][0].filename)
 
         const registerData = await register.save();
 
         res.status(200).send({ success: true, msg: 'Register Data', data: registerData });
     } catch (error) {
-        res.status(400).send({ success: false, msg: error.message });
+        res.status(400).send({ success: false, msg: 'Houve um erro no registro falta dados ou documentos : '.error.message  });
     }
 };
 
@@ -76,11 +75,12 @@ const updateRegister = async (req, res) => {
             let city= req.body.city;
             let state= req.body.state;
             let zip= req.body.zip;
-            let fileDoc = req.body.fileDoc;
-            let fileAddress = req.file.fileAddress;
-            let fileEmployContract = req.file.fileEmployContract;
+            let office = req.body.office;
+            let skills = req.body.skills;
+            let profileLinkedin = req.body.profileLinkedin;
             let fileResume = req.file.fileResume;
             let cel = req.body.cel;
+            
 
             await Register.findByIdAndUpdate({ _id: id }, {
                 $set: {
@@ -93,9 +93,9 @@ const updateRegister = async (req, res) => {
                     city: city,
                     state: state,
                     zip: zip,
-                    fileDoc: fileDoc,
-                    fileAddress: fileAddress,
-                    fileEmployContract: fileEmployContract,
+                    office: office,
+                    skills: skills,
+                    profileLinkedin: profileLinkedin,
                     fileResume: fileResume,
                     cel: cel
                 }
