@@ -1,13 +1,12 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {useState, useEffect} from 'react';
-import registerService from '../service/registerService';
-import UpdateModalComponent from "./UpdateModalComponent";
+import registerService from '../../service/registerService';
+import UpdateModalComponent from "../UpdateModalComponent";
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Button} from 'react-bootstrap'
 
 function ShowComponent(){
     
-
     const[registers, setRegisters] = useState({});
 
     const fetchRegisters = async()=>{

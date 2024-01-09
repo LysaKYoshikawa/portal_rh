@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route}from 'react-router-dom';
 // import CreateComponent from './components/CreateComponent';
-import ShowComponent from './components/ShowComponent';
+import ShowComponent from './components/show/ShowComponent';
 
 
 export default function Index(){
