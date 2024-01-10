@@ -2,8 +2,9 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
 import {useState, useEffect} from 'react';
 import registerService from '../../service/registerService';
 import UpdateModalComponent from "../UpdateModalComponent";
-
+import './ShowComponent.css'; 
 import { Button} from 'react-bootstrap'
+import { format } from 'date-fns';
 
 function ShowComponent(){
     
@@ -11,30 +12,44 @@ function ShowComponent(){
 
     const fetchRegisters = async()=>{
         try{
-            setRegisters(await registerService.getRegisters());
-            console.log('retorna isso', setRegisters)
+            const fetchedRegisters = await registerService.getRegisters();
+
+            
+            const formattedRegisters = {
+            ...fetchedRegisters,
+            data: {
+                ...fetchedRegisters.data,
+                data: fetchedRegisters.data.data.map((register) => ({
+                ...register,
+                date: format(new Date(register.date), 'dd/MM/yyyy'),
+                })),
+            },
+            };
+
+            setRegisters(formattedRegisters);
+
         }catch (error) {
             console.error('Erro ao buscar os registers', error);
-        }
-        
-        
-    }
+        }  
+    };
 
     useEffect(()=>{
         fetchRegisters();
 
     },[]);
 
-    const deleteRegister = async(id, e)=>{
+    const deleteRegister = async(id)=>{
         try {
             let response =  await registerService.deleteRegister(id);
-            console.log('erro do response', response.data);
+            console.log('Retorno:', response.data);
+            window.location.href = window.location.href;
         
             if(response.data.success === true){
-                
-                alert(response.data.msg);
+                window.location.href = window.location.href;
                 document.getElementById(id).parentElement.parentElement.remove();
-                e.target.reset();
+                window.location.href = window.location.href;
+                console.log("deletado?")
+                
                     
             }else{
                 alert(response.data.msg);
@@ -68,31 +83,32 @@ function ShowComponent(){
     }
 
     return(
-        <div class="App">
+        <div className="App">
             
-            <h2>Lista de cadastro</h2>
+            <h2 className='title-table'>Lista de cadastro</h2>
             {
                 
                 registers.data !== undefined && registers.data.data.length > 0 && (
-                    <table class="table" border='1'>
-                        <thead class="thead-dark">
+                    <div className="table-responsive">
+                        <table className="table table-striped table-bordered" border='1'>
+                        <thead className="thead-dark">
                             <tr>
-                                <th scope="col">Nome Completo</th>
-                                <th scope="col">Data de nascimento</th>
-                                <th scope="col">E-mail</th>
-                                <th scope="col">Celular</th>
-                                <th scope="col">RG</th>
-                                <th scope="col">CPF</th>
-                                <th scope="col">Cargo de Interesse</th>
-                                <th scope="col">Endereço</th>
-                                <th scope="col">Cidade</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">CEP</th>
-                                <th scope="col">Habilidades</th>
-                                <th scope="col">Perfil do Linkedin</th>
-                                <th scope="col">Curriculo atualizado</th>
-                                <th scope="col">Delete</th>
-                                <th scope="col">Editar</th>
+                                <th scope="col" className="wide-column text-center">Nome Completo</th>
+                                <th scope="col" className="text-center">Data de registro</th>
+                                <th scope="col" className="text-center">E-mail</th>
+                                <th scope="col" className="text-center">Celular</th>
+                                <th scope="col" className="text-center">RG</th>
+                                <th scope="col" className="text-center">CPF</th>
+                                <th scope="col" className="title-cell">Cargo de Interesse</th>
+                                <th scope="col" className="title-cell">Endereço</th>
+                                <th scope="col" className="title-cell">Cidade</th>
+                                <th scope="col" className="title-cell">Estado</th>
+                                <th scope="col" className="title-cell">CEP</th>
+                                <th scope="col" className="title-cell">Habilidades</th>
+                                <th scope="col" className="title-cell">Perfil do Linkedin</th>
+                                <th scope="col" className="title-cell">Curriculo atualizado</th>
+                                <th scope="col" className="title-cell">Delete</th>
+                                <th scope="col" className="title-cell">Editar</th>
 
                             </tr>                            
                         </thead>
@@ -100,7 +116,7 @@ function ShowComponent(){
                             {
                                 registers.data.data.map(register=>(
                                     <tr key={register._id}>
-                                        <th scope="row"> {register.name}
+                                        <th scope="row" className="wide-column"> {register.name}
                                         </th>
                                         <td>{register.date}</td>
                                         <td>{register.email}</td>
@@ -108,7 +124,7 @@ function ShowComponent(){
                                         <td>{register.rg}</td>
                                         <td>{register.cpf}</td>
                                         <td>{register.office}</td>
-                                        <td>{register.address}</td>
+                                        <td className="wide-column">{register.address}</td>
                                         <td>{register.city}</td>
                                         <td>{register.state}</td>
                                         <td>{register.zip}</td>
@@ -121,7 +137,7 @@ function ShowComponent(){
                                         </td>
                                         <td>
                                             <Button variant="danger" id={register._id} 
-                                            onClick={(e)=>deleteRegister(register._id,e)}
+                                            onClick={(e)=>deleteRegister(register._id)}
                                             >Delete</Button>
                                         </td>
                                         <td>
@@ -144,6 +160,9 @@ function ShowComponent(){
                             }
                         </tbody>
                     </table>
+
+                    </div>
+                    
                 )
             }
         </div>
