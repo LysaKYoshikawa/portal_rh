@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route}from 'react-router-dom';
-// import CreateComponent from './components/CreateComponent';
+import CreateComponent from './components/create/CreateComponent';
 import ShowComponent from './components/show/ShowComponent';
 
 
@@ -14,6 +14,7 @@ export default function Index(){
     <BrowserRouter basename='/'>
       <Routes>
         < Route path="/" element={<App/>}/>
+        < Route path="/add" element={<CreateComponent/>}/>
         < Route path="/show" element={<ShowComponent/>}/>
         
       </Routes>

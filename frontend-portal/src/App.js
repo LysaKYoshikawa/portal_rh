@@ -1,5 +1,5 @@
 import './App.css';
-import CreateComponent from './components/create/CreateComponent'
+import CardComponent from './components/card/CardComponent'
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         </span>
         
       </nav>
-      <CreateComponent/>
+      <CardComponent/>
 
       <footer>
         <p>&copy; 2024 Cadastro de candidato | <a href="https://www.linkedin.com/in/monalysa-yoshikawa/" target="_blank">Linkedin</a> | <a href="https://github.com/LysaKYoshikawa" target="_blank">Github</a></p>

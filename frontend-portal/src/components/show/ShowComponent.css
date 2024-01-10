@@ -64,8 +64,7 @@ text-overflow: ellipsis;
 }
 
 .title-cell {
-    text-align: center; /* Alinha o texto no meio da coluna */
-    color: #007bff; /* Cor de fundo - ajuste conforme necessário */
-     /* Cor do texto - ajuste conforme necessário */
-    padding: 10px; /* Espaçamento interno para melhorar a aparência */
+    text-align: center;
+    color: #007bff;
+    padding: 10px;
 }
