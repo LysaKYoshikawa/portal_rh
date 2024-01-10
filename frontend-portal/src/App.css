@@ -22,6 +22,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  width: 100%;
 }
 
 .App-link {
@@ -40,12 +41,12 @@
 footer {
   background-color: #333;
   color: #fff;
-  padding: 30px;
   text-align: center;
   position: fixed;
   width: 100%;
   bottom: 0;
   font-size: 25px;
+  margin-top: 10px;
 }
 
 

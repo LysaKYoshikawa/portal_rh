@@ -39,12 +39,12 @@ function UpdateModalComponent(props){
         formData.append('state', state);
         
 
-        if(selectFile != '' && selectFile.length != 0){
+        if(selectFile !== '' && selectFile.length !== 0){
             formData.append('image', selectFile);
         }
 
         const response = await registerService.update(formData);
-        if(response.data.success==true){
+        if(response.data.success===true){
             alert(response.data.msg)
         }else{
             alert(response.data.msg)
