@@ -5,8 +5,10 @@ import UpdateModalComponent from "../UpdateModalComponent";
 import './ShowComponent.css'; 
 import { Button} from 'react-bootstrap'
 import { format } from 'date-fns';
+import { useNavigate } from "react-router-dom";
 
 function ShowComponent(){
+    const navigate = useNavigate();
     
     const[registers, setRegisters] = useState({});
 
@@ -90,7 +92,7 @@ function ShowComponent(){
                 
                 registers.data !== undefined && registers.data.data.length > 0 && (
                     <div className="table-responsive">
-                        <table className="table table-striped table-bordered" border='1'>
+                        <table className="table table-striped table-bordered m-5" border='1'>
                         <thead className="thead-dark">
                             <tr>
                                 <th scope="col" className="wide-column text-center">Nome Completo</th>
@@ -165,6 +167,8 @@ function ShowComponent(){
                     
                 )
             }
+            <Button className="customer-btn" variant="danger" onClick={() => navigate("/")}>Tela Inicial</Button>
+
         </div>
     )
 };

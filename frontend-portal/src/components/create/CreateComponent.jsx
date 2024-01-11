@@ -29,7 +29,7 @@ function CreateComponent(){
         event.preventDefault();
         if (!attachmentsAdded) {
             setMessage('Por favor, adicione os anexos antes de enviar o formulário.');
-            return; // Não continue com a submissão do formulário
+            return;
         }
         const formData = new FormData();
 
