@@ -19,10 +19,10 @@ const createRegister = async (req, res) => {
             office: req.body.office,
             skills: req.body.skills,
             profileLinkedin: req.body.profileLinkedin,
-            fileResume: req.files['fileResume'][0].filename,
+            fileResume: req.files['fileResume'][0].path,
             cel: req.body.cel
         });
-        console.log('o que vai aparecer',req.files['fileResume'][0].filename)
+        console.log('o que vai aparecer',req.files['fileResume'][0].path)
 
         const registerData = await register.save();
 
@@ -63,7 +63,7 @@ const deleteRegister = async (req, res) => {
 const updateRegister = async (req, res) => {
     try {
 
-        if (req.file !== undefined) {
+        if (req.files['fileResume'] !== undefined) {
 
             let id = req.body.id;
             let name = req.body.name;
@@ -74,12 +74,8 @@ const updateRegister = async (req, res) => {
             let address = req.body.address;
             let city= req.body.city;
             let state= req.body.state;
-            let zip= req.body.zip;
-            let office = req.body.office;
-            let skills = req.body.skills;
             let profileLinkedin = req.body.profileLinkedin;
-            let fileResume = req.file.fileResume;
-            let cel = req.body.cel;
+            let fileResume = req.files['fileResume'][0].path;
             
 
             await Register.findByIdAndUpdate({ _id: id }, {
@@ -92,12 +88,9 @@ const updateRegister = async (req, res) => {
                     address: address,
                     city: city,
                     state: state,
-                    zip: zip,
-                    office: office,
-                    skills: skills,
                     profileLinkedin: profileLinkedin,
                     fileResume: fileResume,
-                    cel: cel
+                    
                 }
             });
             res.status(200).send({ sucess: true, msg: 'Funcionario ATUALIZADO com Sucesso!!!' });
@@ -115,8 +108,7 @@ const updateRegister = async (req, res) => {
             let address = req.body.address;
             let city= req.body.city;
             let state= req.body.state;
-            let zip= req.body.zip;
-            let cel = req.body.cel;
+            let profileLinkedin = req.body.profileLinkedin;
 
             await Register.findByIdAndUpdate({ _id: id }, {
                 $set: {
@@ -126,10 +118,9 @@ const updateRegister = async (req, res) => {
                     rg: rg,
                     cpf: cpf,
                     address: address,
-                    cel: cel,
                     city: city,
                     state: state,
-                    zip: zip,
+                    profileLinkedin: profileLinkedin,
                     msg: error.message
                 }
             });

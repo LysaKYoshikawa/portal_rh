@@ -22,6 +22,7 @@ function UpdateModalComponent(props){
     const [city,setCity] = useState(props.city);
     const [state,setState] = useState(props.state);
     const [id, setId] = useState(props.id);
+    const [profileLinkedin,setProfileLinkedin] = useState(props.profileLinkedin);
     const [selectFile, setSelectedFile] = useState('');
 
     const handleSubmit = async(event) => {
@@ -33,7 +34,6 @@ function UpdateModalComponent(props){
         formData.append('title',title);
         formData.append('date', date);
         formData.append('email', email);
-        formData.append('cel', cel);
         formData.append('address', address);
         formData.append('city', city);
         formData.append('state', state);
@@ -44,11 +44,11 @@ function UpdateModalComponent(props){
         }
 
         const response = await registerService.update(formData);
-        if(response.data.success===true){
-            alert(response.data.msg)
-        }else{
-            alert(response.data.msg)
-        }
+            if(response.data.success===true){
+                alert(response.data.msg)
+            }else{
+                alert(response.data.msg)
+            }
 
         initModal()
     }
@@ -118,6 +118,12 @@ function UpdateModalComponent(props){
                     name='state'
                     value={state}
                     onChange={event => setState(event.target.value)}
+                    required/>
+                    <br/><br/>
+                    <input type="text"
+                    name='profileLinkedin'
+                    value={profileLinkedin}
+                    onChange={event => setProfileLinkedin(event.target.value)}
                     required/>
                     <br/><br/>
                     <input type="file"
