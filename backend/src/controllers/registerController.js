@@ -1,16 +1,16 @@
+const moment = require('moment');
 const Register = require('../models/registerModel');
 
 const createRegister = async (req, res) => {
     try {
-        if (!req.files || !req.files['fileDoc']) {
-            return res.status(400).send({ success: false, msg: 'Campo de arquivo "fileDoc" ausente ou upload falhou.' });
+        if (!req.files || !req.files['fileResume']) {
+            return res.status(400).send({ success: false, msg: 'Campo de arquivo "Curriculo" ausente ou upload falhou.' });
         }
-
-        console.log(req.files)
+        const date = moment(req.body.date, "DD/MM/YYYY").toDate();
 
         const register = new Register({
             name: req.body.name,
-            date: req.body.date,
+            date: date,
             email: req.body.email,
             rg: req.body.rg,
             cpf: req.body.cpf,
@@ -18,18 +18,19 @@ const createRegister = async (req, res) => {
             city: req.body.city,
             state: req.body.state,
             zip: req.body.zip,
-            fileDoc: req.files['fileDoc'][0].filename,
-            fileAddress: req.files['fileAddress'][0].path,
-            fileEmployContract: req.files['fileEmployContract'][0].path,
+            office: req.body.office,
+            skills: req.body.skills,
+            profileLinkedin: req.body.profileLinkedin,
             fileResume: req.files['fileResume'][0].path,
             cel: req.body.cel
         });
+        console.log('o que vai aparecer',req.files['fileResume'][0].path)
 
         const registerData = await register.save();
 
         res.status(200).send({ success: true, msg: 'Register Data', data: registerData });
     } catch (error) {
-        res.status(400).send({ success: false, msg: error.message });
+        res.status(400).send({ success: false, msg: 'Houve um erro no registro falta dados ou documentos : '.error.message  });
     }
 };
 
@@ -64,23 +65,20 @@ const deleteRegister = async (req, res) => {
 const updateRegister = async (req, res) => {
     try {
 
-        if (req.file !== undefined) {
+        if (req.files['fileResume'] !== undefined) {
+            
 
             let id = req.body.id;
             let name = req.body.name;
-            let date = req.body.date;
+            let date = moment(req.body.date, "DD/MM/YYYY").toDate();
             let email = req.body.email;
             let rg = req.body.rg;
             let cpf = req.body.cpf;            
             let address = req.body.address;
             let city= req.body.city;
             let state= req.body.state;
-            let zip= req.body.zip;
-            let fileDoc = req.body.fileDoc;
-            let fileAddress = req.file.fileAddress;
-            let fileEmployContract = req.file.fileEmployContract;
-            let fileResume = req.file.fileResume;
-            let cel = req.body.cel;
+            let profileLinkedin = req.body.profileLinkedin;
+            let fileResume = req.files['fileResume'][0].path;
 
             await Register.findByIdAndUpdate({ _id: id }, {
                 $set: {
@@ -92,12 +90,9 @@ const updateRegister = async (req, res) => {
                     address: address,
                     city: city,
                     state: state,
-                    zip: zip,
-                    fileDoc: fileDoc,
-                    fileAddress: fileAddress,
-                    fileEmployContract: fileEmployContract,
+                    profileLinkedin: profileLinkedin,
                     fileResume: fileResume,
-                    cel: cel
+                    
                 }
             });
             res.status(200).send({ sucess: true, msg: 'Funcionario ATUALIZADO com Sucesso!!!' });
@@ -107,16 +102,14 @@ const updateRegister = async (req, res) => {
 
             let id = req.body.id;
             let name = req.body.name;
-            let date = req.body.date;
+            let date = moment(req.body.date, "DD/MM/YYYY").toDate();;
             let email = req.body.email;
-
             let rg = req.body.rg;
             let cpf = req.body.cpf;
             let address = req.body.address;
             let city= req.body.city;
             let state= req.body.state;
-            let zip= req.body.zip;
-            let cel = req.body.cel;
+            let profileLinkedin = req.body.profileLinkedin;
 
             await Register.findByIdAndUpdate({ _id: id }, {
                 $set: {
@@ -126,10 +119,9 @@ const updateRegister = async (req, res) => {
                     rg: rg,
                     cpf: cpf,
                     address: address,
-                    cel: cel,
                     city: city,
                     state: state,
-                    zip: zip,
+                    profileLinkedin: profileLinkedin,
                     msg: error.message
                 }
             });

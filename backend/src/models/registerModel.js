@@ -6,7 +6,8 @@ const postSchema = mongoose.Schema({
         required:true
     },
     date:{
-        type:String,
+        type: Date,
+        format: "DD/MM/YYYY",
         required:true
     },
     email:{
@@ -21,7 +22,7 @@ const postSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    fileDoc:{
+    office:{
         type:String,
         required:true
     },
@@ -41,11 +42,11 @@ const postSchema = mongoose.Schema({
         type:Number,
         required:true
     },
-    fileAddress:{
+    skills:{
         type:String,
         required:true
     },
-    fileEmployContract:{
+    profileLinkedin:{
         type:String,
         required:true
     },
@@ -54,7 +55,7 @@ const postSchema = mongoose.Schema({
         required:true
     },
     cel:{
-        type:Number,
+        type:String,
         required:true
     }
 

@@ -1,0 +1,21 @@
+.custom-container {
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+  
+  .card {
+    font-size: 18px;
+  }
+  
+  .card-title {
+    color: #d46220;
+    font-weight: bold;
+  }
+  
+  .btn {
+    background-color: #d46220;
+    color:#fff;
+    font-weight: bold;
+    border-color: #d46220;
+  }
+  
