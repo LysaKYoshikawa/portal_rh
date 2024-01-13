@@ -41,6 +41,6 @@ const fields = [
 registerRouter.post('/create-register', upload.fields(fields), registerController.createRegister);
 registerRouter.get('/get-register', registerController.getRegister);
 registerRouter.get('/delete-register/:id', registerController.deleteRegister)
-registerRouter.post('/update-register', upload.fields(fields), registerController.updateRegister);
+registerRouter.post('/update-register', upload.single('fileResume'), registerController.updateRegister);
 
 module.exports = registerRouter;

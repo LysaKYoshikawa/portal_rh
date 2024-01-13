@@ -1,3 +1,4 @@
+const moment = require('moment');
 const Register = require('../models/registerModel');
 
 const createRegister = async (req, res) => {
@@ -5,10 +6,11 @@ const createRegister = async (req, res) => {
         if (!req.files || !req.files['fileResume']) {
             return res.status(400).send({ success: false, msg: 'Campo de arquivo "Curriculo" ausente ou upload falhou.' });
         }
+        const date = moment(req.body.date, "DD/MM/YYYY").toDate();
 
         const register = new Register({
             name: req.body.name,
-            date: req.body.date,
+            date: date,
             email: req.body.email,
             rg: req.body.rg,
             cpf: req.body.cpf,
@@ -64,10 +66,11 @@ const updateRegister = async (req, res) => {
     try {
 
         if (req.files['fileResume'] !== undefined) {
+            
 
             let id = req.body.id;
             let name = req.body.name;
-            let date = req.body.date;
+            let date = moment(req.body.date, "DD/MM/YYYY").toDate();
             let email = req.body.email;
             let rg = req.body.rg;
             let cpf = req.body.cpf;            
@@ -76,7 +79,6 @@ const updateRegister = async (req, res) => {
             let state= req.body.state;
             let profileLinkedin = req.body.profileLinkedin;
             let fileResume = req.files['fileResume'][0].path;
-            
 
             await Register.findByIdAndUpdate({ _id: id }, {
                 $set: {
@@ -100,9 +102,8 @@ const updateRegister = async (req, res) => {
 
             let id = req.body.id;
             let name = req.body.name;
-            let date = req.body.date;
+            let date = moment(req.body.date, "DD/MM/YYYY").toDate();;
             let email = req.body.email;
-
             let rg = req.body.rg;
             let cpf = req.body.cpf;
             let address = req.body.address;

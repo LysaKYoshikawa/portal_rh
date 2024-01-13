@@ -6,7 +6,8 @@ const postSchema = mongoose.Schema({
         required:true
     },
     date:{
-        type:String,
+        type: Date,
+        format: "DD/MM/YYYY",
         required:true
     },
     email:{
@@ -54,7 +55,7 @@ const postSchema = mongoose.Schema({
         required:true
     },
     cel:{
-        type:Number,
+        type:String,
         required:true
     }
 
