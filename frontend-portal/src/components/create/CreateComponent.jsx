@@ -246,7 +246,7 @@ function CreateComponent(){
 
                     </div>
 
-                    <div className=" input-group col-md-3">
+                    <div className="input-group col-md-3">
                         <div className="form-group col-md-4 col-sm-12">
                             <label className='label-text mt-3' 
                             htmlFor="fileResume"

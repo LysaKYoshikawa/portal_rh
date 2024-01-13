@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {Modal, Button} from 'react-bootstrap'
-import registerService from "../service/registerService";
+import registerService from "../../service/registerService";
 
 
 
@@ -12,7 +12,7 @@ function UpdateModalComponent(props){
         return invokeModal(!isShow);
     }
 
-    const [title, setTitle] = useState(props.title);
+    const [name, setName] = useState(props.name);
     const [date, setDate] = useState(props.date);
     const [email,setEmail] = useState(props.email);
     const [cel,setCel] = useState(props.cel);
@@ -31,7 +31,7 @@ function UpdateModalComponent(props){
         const formData = new FormData()
 
         formData.append('id', id);
-        formData.append('title',title);
+        formData.append('name',name);
         formData.append('date', date);
         formData.append('email', email);
         formData.append('address', address);
@@ -40,7 +40,7 @@ function UpdateModalComponent(props){
         
 
         if(selectFile !== '' && selectFile.length !== 0){
-            formData.append('image', selectFile);
+            formData.append('fileResume', selectFile);
         }
 
         const response = await registerService.update(formData);
@@ -66,78 +66,90 @@ function UpdateModalComponent(props){
             </Modal.Header>
             <form onSubmit={handleSubmit}>
                 <Modal.Body>
-                    <input type="text"
-                    name='title'
+                    <input type="name"
+                    name='name'
                     placeholder="Altere o nome"
-                    value={title}
-                    onChange={event => setTitle(event.target.value)}
+                    value={name}
+                    onChange={event => setName(event.target.value)}
+                    className="form-control"
                     required/>
+                    <br/>
                     <input type="date"
                     name='data'
                     value={date}
                     onChange={event => setDate(event.target.value)}
+                    className="form-control"
                     required/>
-                    <br/><br/>
-                    <input type="text"
+                    <br/>
+                    <input type="email"
                     name='email'
                     value={email}
                     onChange={event => setEmail(event.target.value)}
+                    className="form-control"
                     required/>
-                    <br/><br/>
-                    <input type="number"
+                    <br/>
+                    <input type="text"
                     name='cel'
                     value={cel}
                     onChange={event => setCel(event.target.value)}
+                    className="form-control"
                     required/>
-                    <br/><br/>
+                    <br/>
                     <input type="text"
                     name='rg'
                     value={rg}
                     onChange={event => setRg(event.target.value)}
+                    className="form-control"
                     required/>
-                    <br/><br/>
+                    <br/>
                     <input type="text"
                     name='cpf'
                     value={cpf}
                     onChange={event => setCpf(event.target.value)}
+                    className="form-control"
                     required/>
-                    <br/><br/>
+                    <br/>
                     <input type="text"
                     name='address'
                     value={address}
                     onChange={event => setAddress(event.target.value)}
+                    className="form-control"
                     required/>
-                    <br/><br/>
+                    <br/>
                     <input type="text"
                     name='city'
                     value={city}
                     onChange={event => setCity(event.target.value)}
+                    className="form-control"
                     required/>
-                    <br/><br/>
+                    <br/>
                     <input type="text"
                     name='state'
                     value={state}
                     onChange={event => setState(event.target.value)}
+                    className="form-control"
                     required/>
-                    <br/><br/>
+                    <br/>
                     <input type="text"
                     name='profileLinkedin'
                     value={profileLinkedin}
                     onChange={event => setProfileLinkedin(event.target.value)}
+                    className="form-control"
                     required/>
-                    <br/><br/>
+                    <br/>
                     <input type="file"
-                    name='file'
+                    name='fileResume'
                     onChange={event => setSelectedFile(event.target.files[0])}
+                    className="form-control"
                     required/>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="danger" onClick={initModal}>
+                    <Button variant="secondary" onClick={initModal}>
                         Fechar
 
                     </Button>
-                    <Button type="submit" variant="dark">
+                    <Button type="submit" variant="success">
                         Atualizar
 
                     </Button>

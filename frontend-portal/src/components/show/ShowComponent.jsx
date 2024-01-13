@@ -1,40 +1,39 @@
 import '../../../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
 import {useState, useEffect} from 'react';
 import registerService from '../../service/registerService';
-import UpdateModalComponent from "../UpdateModalComponent";
+import UpdateModalComponent from "../update/UpdateModalComponent";
 import './ShowComponent.css'; 
 import { Button} from 'react-bootstrap'
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 import { useNavigate } from "react-router-dom";
 
 function ShowComponent(){
     const navigate = useNavigate();
     
     const[registers, setRegisters] = useState({});
-
-    const fetchRegisters = async()=>{
-        try{
+   
+    const fetchRegisters = async () => {
+        try {
             const fetchedRegisters = await registerService.getRegisters();
-
-            
+    
             const formattedRegisters = {
-            ...fetchedRegisters,
-            data: {
-                ...fetchedRegisters.data,
-                data: fetchedRegisters.data.data.map((register) => ({
-                ...register,
-                date: format(new Date(register.date), 'dd/MM/yyyy'),
-                })),
-            },
+                ...fetchedRegisters,
+                data: {
+                    ...fetchedRegisters.data,
+                    data: fetchedRegisters.data.data.map((register) => ({
+                        ...register,
+                        date: isValid(new Date(register.date)) ? format(new Date(register.date), 'dd/MM/yyyy') : 'Data inválida',
+                    })),
+                },
             };
-
+    
             setRegisters(formattedRegisters);
-
-        }catch (error) {
+    
+        } catch (error) {
             console.error('Erro ao buscar os registers', error);
-        }  
-    };
-
+        }
+    };        
+    
     useEffect(()=>{
         fetchRegisters();
 
@@ -47,9 +46,8 @@ function ShowComponent(){
             window.location.href = window.location.href;
         
             if(response.data.success === true){
-                window.location.href = window.location.href;
                 document.getElementById(id).parentElement.parentElement.remove();
-                window.location.href = window.location.href;
+                
                 console.log("deletado?")
                 
                     
@@ -101,16 +99,16 @@ function ShowComponent(){
                                 <th scope="col" className="text-center">Celular</th>
                                 <th scope="col" className="text-center">RG</th>
                                 <th scope="col" className="text-center">CPF</th>
-                                <th scope="col" className="title-cell">Cargo de Interesse</th>
-                                <th scope="col" className="title-cell">Endereço</th>
-                                <th scope="col" className="title-cell">Cidade</th>
-                                <th scope="col" className="title-cell">Estado</th>
-                                <th scope="col" className="title-cell">CEP</th>
-                                <th scope="col" className="title-cell">Habilidades</th>
-                                <th scope="col" className="title-cell">Perfil do Linkedin</th>
-                                <th scope="col" className="title-cell">Curriculo atualizado</th>
-                                <th scope="col" className="title-cell">Delete</th>
-                                <th scope="col" className="title-cell">Editar</th>
+                                <th scope="col" className="text-center">Cargo de Interesse</th>
+                                <th scope="col" className="text-center">Endereço</th>
+                                <th scope="col" className="text-center">Cidade</th>
+                                <th scope="col" className="text-center">Estado</th>
+                                <th scope="col" className="text-center">CEP</th>
+                                <th scope="col" className="text-center">Habilidades</th>
+                                <th scope="col" className="text-center">Perfil do Linkedin</th>
+                                <th scope="col" className="text-center">Curriculo atualizado</th>
+                                <th scope="col" className="text-center">Delete</th>
+                                <th scope="col" className="text-center">Editar</th>
 
                             </tr>                            
                         </thead>
