@@ -21,7 +21,7 @@ const createRegister = async (req, res) => {
             office: req.body.office,
             skills: req.body.skills,
             profileLinkedin: req.body.profileLinkedin,
-            fileResume: req.files['fileResume'][0].path,
+            fileResume: req.files['fileResume'][0].filename,
             cel: req.body.cel
         });
         console.log('o que vai aparecer',req.files['fileResume'][0].path)
@@ -30,7 +30,7 @@ const createRegister = async (req, res) => {
 
         res.status(200).send({ success: true, msg: 'Register Data', data: registerData });
     } catch (error) {
-        res.status(400).send({ success: false, msg: 'Houve um erro no registro falta dados ou documentos : '.error.message  });
+        res.status(400).send({ success: false, msg: 'Houve um erro no registro falta dados ou documentos : ' + error.message  });
     }
 };
 
