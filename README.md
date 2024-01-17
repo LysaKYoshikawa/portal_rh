@@ -9,7 +9,7 @@ Este projeto trata-se de uma portal de cadastro de funcionarios com a tela de ca
 
 ## Estrutura de Diretórios
 
-Ele é dividido em duas partes a parte backend e frontend separando sua responsabilidades. Em um vies corporativo eles estariam em repositorios separados.
+Ele é dividido em duas partes a parte backend e frontend separando sua responsabilidades.
 
 ### No projeto backeand temos: 
 
@@ -24,7 +24,7 @@ Ele é dividido em duas partes a parte backend e frontend separando sua responsa
 ### No projeto frontend temos: 
 - `public`: Contém codigo inicial do react.
 - `src`: Contém o código-fonte principal do aplicativo.
-  - `components`: Componentes reutilizáveis.
+  - `components`: Componentes.
   - `services`: Funções de serviço para buscar dados ou realizar operações.
 - `index`: dados das rotas
 - `App.tsx`: Ponto de entrada do aplicativo.

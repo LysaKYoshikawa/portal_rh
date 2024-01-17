@@ -30,7 +30,7 @@ const createRegister = async (req, res) => {
 
         res.status(200).send({ success: true, msg: 'Register Data', data: registerData });
     } catch (error) {
-        res.status(400).send({ success: false, msg: 'Houve um erro no registro falta dados ou documentos : '.error.message  });
+        res.status(400).send({ success: false, msg: 'Houve um erro no registro falta dados ou documentos : ' + error.message  });
     }
 };
 
