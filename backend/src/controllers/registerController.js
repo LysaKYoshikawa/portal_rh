@@ -21,7 +21,7 @@ const createRegister = async (req, res) => {
             office: req.body.office,
             skills: req.body.skills,
             profileLinkedin: req.body.profileLinkedin,
-            fileResume: req.files['fileResume'][0].filename,
+            fileResume: req.files['fileResume'][0].path,
             cel: req.body.cel
         });
         console.log('o que vai aparecer',req.files['fileResume'][0].path)
@@ -64,21 +64,25 @@ const deleteRegister = async (req, res) => {
 
 const updateRegister = async (req, res) => {
     try {
+        console.log("aquiiiiii");
+        let id = req.body.id;
+        let name = req.body.name;
+        let date = moment(req.body.date, "DD/MM/YYYY").toDate();
+        let email = req.body.email;
+        let rg = req.body.rg;
+        let cpf = req.body.cpf;
+        let address = req.body.address;
+        let city = req.body.city;
+        let state = req.body.state;
+        let profileLinkedin = req.body.profileLinkedin;
 
-        if (req.files['fileResume'] !== undefined) {
-            
+        // Verifique se req.files['fileResume'] existe e não está vazio
+        let hasFileResume = req.files && req.files['fileResume'] && req.files['fileResume'].length > 0;
 
-            let id = req.body.id;
-            let name = req.body.name;
-            let date = moment(req.body.date, "DD/MM/YYYY").toDate();
-            let email = req.body.email;
-            let rg = req.body.rg;
-            let cpf = req.body.cpf;            
-            let address = req.body.address;
-            let city= req.body.city;
-            let state= req.body.state;
-            let profileLinkedin = req.body.profileLinkedin;
+        if (hasFileResume) {
             let fileResume = req.files['fileResume'][0].path;
+
+            console.log("Entrou aqui mermao");
 
             await Register.findByIdAndUpdate({ _id: id }, {
                 $set: {
@@ -92,25 +96,12 @@ const updateRegister = async (req, res) => {
                     state: state,
                     profileLinkedin: profileLinkedin,
                     fileResume: fileResume,
-                    
                 }
             });
-            res.status(200).send({ sucess: true, msg: 'Funcionario ATUALIZADO com Sucesso!!!' });
-        }
 
-        else {
-
-            let id = req.body.id;
-            let name = req.body.name;
-            let date = moment(req.body.date, "DD/MM/YYYY").toDate();;
-            let email = req.body.email;
-            let rg = req.body.rg;
-            let cpf = req.body.cpf;
-            let address = req.body.address;
-            let city= req.body.city;
-            let state= req.body.state;
-            let profileLinkedin = req.body.profileLinkedin;
-
+            res.status(200).send({ success: true, msg: 'Funcionario ATUALIZADO com Sucesso!!!' });
+        } else {
+            // Se não houver arquivo, atualize os outros campos
             await Register.findByIdAndUpdate({ _id: id }, {
                 $set: {
                     name: name,
@@ -122,19 +113,93 @@ const updateRegister = async (req, res) => {
                     city: city,
                     state: state,
                     profileLinkedin: profileLinkedin,
-                    msg: error.message
                 }
             });
-            res.status(200).send({ sucess: true, msg: 'Funcionario ATUALIZADO com Sucesso!!!' });
 
+            res.status(200).send({ success: true, msg: 'Funcionario ATUALIZADO com Sucesso!!!' });
         }
-
-
-
     } catch (error) {
-        res.status(400).send({ sucess: false, msg: error.message });
+        res.status(400).send({ success: false, msg: error.message });
     }
-}
+};
+
+// const updateRegister = async (req, res) => {
+//     try {
+//         console.log("aquiiiiii")
+//         let id = req.body.id;
+//         let name = req.body.name;
+//         let date = moment(req.body.date, "DD/MM/YYYY").toDate();
+//         let email = req.body.email;
+//         let rg = req.body.rg;
+//         let cpf = req.body.cpf;
+//         let address = req.body.address;
+//         let city = req.body.city;
+//         let state = req.body.state;
+//         let profileLinkedin = req.body.profileLinkedin;
+//         console.log("Definição do file resume", name)
+//         let hasFileResume = req.files && req.files['fileResume'] && req.files['fileResume'].length > 0;
+
+//         if (hasFileResume) {
+//             let fileResume = req.files['fileResume'][0].path;
+
+//             console.log("Entrou aqui mermao")
+
+//             await Register.findByIdAndUpdate({ _id: id }, {
+//                 $set: {
+//                     name: name,
+//                     date: date,
+//                     email: email,
+//                     rg: rg,
+//                     cpf: cpf,
+//                     address: address,
+//                     city: city,
+//                     state: state,
+//                     profileLinkedin: profileLinkedin,
+//                     fileResume: fileResume,
+                    
+                    
+//                 }
+                
+//             });
+//             res.status(200).send({ sucess: true, msg: 'Funcionario ATUALIZADO com Sucesso!!!' });
+//         }
+
+//         else {
+
+//             let id = req.body.id;
+//             let name = req.body.name;
+//             let date = moment(req.body.date, "DD/MM/YYYY").toDate();;
+//             let email = req.body.email;
+//             let rg = req.body.rg;
+//             let cpf = req.body.cpf;
+//             let address = req.body.address;
+//             let city= req.body.city;
+//             let state= req.body.state;
+//             let profileLinkedin = req.body.profileLinkedin;
+
+//             await Register.findByIdAndUpdate({ _id: id }, {
+//                 $set: {
+//                     name: name,
+//                     date: date,
+//                     email: email,
+//                     rg: rg,
+//                     cpf: cpf,
+//                     address: address,
+//                     city: city,
+//                     state: state,
+//                     profileLinkedin: profileLinkedin,
+//                 }
+//             });
+//             res.status(200).send({ sucess: true, msg: 'Funcionario ATUALIZADO com Sucesso!!!' });
+
+//         }
+
+
+
+//     } catch (error) {
+//         res.status(400).send({ sucess: false, msg: error.message });
+//     }
+// }
 
 module.exports = {
     createRegister,

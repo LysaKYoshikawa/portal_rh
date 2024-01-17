@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {Modal, Button} from 'react-bootstrap'
 import registerService from "../../service/registerService";
+import { format } from 'date-fns';
 
 
 
@@ -11,11 +12,11 @@ function UpdateModalComponent(props){
     const initModal = () => {
         return invokeModal(!isShow);
     }
+    
 
     const [name, setName] = useState(props.name);
     const [date, setDate] = useState(props.date);
     const [email,setEmail] = useState(props.email);
-    const [cel,setCel] = useState(props.cel);
     const [rg, setRg] = useState(props.rg);
     const [cpf, setCpf] = useState(props.cpf);
     const [address,setAddress] = useState(props.address);
@@ -27,16 +28,23 @@ function UpdateModalComponent(props){
 
     const handleSubmit = async(event) => {
         event.preventDefault();
+        // Verifica se a data já está no formato DD/MM/AAAA
+        const formattedDate = /\d{2}\/\d{2}\/\d{4}/.test(date)
+        ? date
+        : format(new Date(date), 'dd/MM/yyyy');
 
         const formData = new FormData()
 
         formData.append('id', id);
         formData.append('name',name);
-        formData.append('date', date);
+        formData.append('date', formattedDate);
         formData.append('email', email);
         formData.append('address', address);
         formData.append('city', city);
         formData.append('state', state);
+        formData.append('cpf', cpf);
+        formData.append('rg', rg);
+        formData.append('profileLinkedin', profileLinkedin);
         
 
         if(selectFile !== '' && selectFile.length !== 0){
@@ -85,13 +93,6 @@ function UpdateModalComponent(props){
                     name='email'
                     value={email}
                     onChange={event => setEmail(event.target.value)}
-                    className="form-control"
-                    required/>
-                    <br/>
-                    <input type="text"
-                    name='cel'
-                    value={cel}
-                    onChange={event => setCel(event.target.value)}
                     className="form-control"
                     required/>
                     <br/>
