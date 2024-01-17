@@ -21,7 +21,7 @@ const createRegister = async (req, res) => {
             office: req.body.office,
             skills: req.body.skills,
             profileLinkedin: req.body.profileLinkedin,
-            fileResume: req.files['fileResume'][0].path,
+            fileResume: req.files['fileResume'][0].filename,
             cel: req.body.cel
         });
         console.log('o que vai aparecer',req.files['fileResume'][0].path)
